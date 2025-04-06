@@ -32,7 +32,7 @@ const baseRouter = express.Router();
 let db = null; // Conexión global
 let lastUsedTime = Date.now();
 
-const PORT = process.env.PORT || 3018;
+const PORT = process.env.PORT || 3028;
 
 // Abrir la conexión global si no está abierta
 function ensureDatabaseConnection() {
@@ -94,12 +94,12 @@ import bcrypt from 'bcryptjs'
 
 let menuVersion = 2; // O usa un timestamp inicial
 
-const JWT_SECRET = process.env.JWT_SECRET || "clave-unica-de-esta-app-aniceta"; 
+const JWT_SECRET = process.env.JWT_SECRET || "clave-unica-de-esta-app-casa-vera"; 
 
 // Hardcoded user for demonstration purposes
 const hardcodedUser = {
   username: "admin",
-  password: bcrypt.hashSync("aniceta_app", 8)  // Hashed password
+  password: bcrypt.hashSync("casa-vera_app", 8)  // Hashed password
 };
 
 // Endpoint de login
@@ -110,7 +110,7 @@ baseRouter.post('/api/auth/login', (req, res) => {
     
     // Generar el token con identificación de la app y tiempo de expiración
     const token = jwt.sign(
-      { id: hardcodedUser.username, app: "aniceta" },
+      { id: hardcodedUser.username, app: "casa-vera" },
       JWT_SECRET,
     );
 
@@ -451,7 +451,7 @@ baseRouter.delete('/api/menu/:id', (req, res) => {
   baseRouter.post('/api/announcements', upload.single('image'), async (req, res) => {
     const db = ensureDatabaseConnection();
     const { text, paragraph, state } = req.body;
-    const BASE_URL = 'https://octopus-app.com.ar/aniceta';
+    const BASE_URL = 'https://octopus-app.com.ar/casa-vera';
 
     let newImageUrl = '';
     if (req.file) {
@@ -1039,13 +1039,13 @@ baseRouter.get('/monitor/memory', (req, res) => {
 
 
 
-app.use('/aniceta', baseRouter);
+app.use('/casa-vera', baseRouter);
 
 // Luego sirve el contenido estático
-app.use('/aniceta', express.static(path.join(__dirname, 'public')));
+app.use('/casa-vera', express.static(path.join(__dirname, 'public')));
 
 // Finalmente, para todas las demás rutas bajo '/inventario', sirve el index.html
-app.get('/aniceta/*', (req, res) => {
+app.get('/casa-vera/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 

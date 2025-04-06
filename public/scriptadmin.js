@@ -27,7 +27,7 @@ function formatDate(date) {
 }
 
 function loadOrders() {
-    fetch('https://octopus-app.com.ar/aniceta/api/orders')
+    fetch('https://octopus-app.com.ar/casa-vera/api/orders')
         .then(response => response.json())
         .then(orders => {
             const orderList = document.getElementById('orderList');
@@ -124,7 +124,7 @@ function toggleOrderStatus(orderId) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`https://octopus-app.com.ar/aniceta/api/orders/${orderId}/status`, {
+            fetch(`https://octopus-app.com.ar/casa-vera/api/orders/${orderId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
