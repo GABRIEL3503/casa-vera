@@ -1,0 +1,266 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFF0C8;
+}
+
+.container {
+  max-width: 800px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-button {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.order-button.pending {
+  background-color: #dc3545;
+}
+
+.order-button.paid {
+  background-color: #28a745;
+}
+
+.order-button:hover {
+  opacity: 0.9;
+}
+
+.details-button {
+  padding: 15px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.details-button:hover {
+  background-color: #f8f9fa;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  padding: 40px 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.order-details {
+  font-family: "Nunito", serif;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 24px 14px;
+  }
+  
+  .order-button {
+      padding: 12px;
+      font-size: 14px;
+  }
+
+  .details-button {
+      padding: 12px;
+  }
+}
+/* Footer base styles */
+footer {
+  width: 100%;
+  padding: 22px 0;
+  background-color: #262626;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 40px;
+  font-family: "Nunito", serif;
+}
+
+/* Left container styles */
+.contain-foot-uno {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.contain-foot-uno img {
+  width: 200px;
+  height: auto;
+}
+
+.contain-foot-uno p {
+  margin: 0;
+  color: rgb(255, 252, 246);
+  font-size: 24px;
+}
+
+/* Right container styles */
+.contain-foot-dos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.contain-foot-dos p,
+.contain-foot-dos a {
+  margin: 0;
+  font-size: 24px;
+  color: rgb(255, 252, 246);
+}
+
+.foot-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 4px;
+}
+
+.foot-link a {
+  color: #108DEE;
+  text-decoration: none;
+}
+
+.web-link {
+  color: #108DEE !important;
+  letter-spacing: 1px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  footer {
+    padding: 20px;
+  }
+
+  .contain-foot-uno img {
+    width: 150px;
+  }
+
+  .contain-foot-uno p,
+  .contain-foot-dos p,
+  .contain-foot-dos a {
+    font-size: 8px;
+  }
+
+  .foot-link {
+    gap: 4px;
+  }
+}
+
+/* Ensure footer stays at bottom */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.date-group {
+  border-radius: 8px;
+  padding: 17px;
+  background-color: #ffffff;
+  display: flex
+;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-header {
+  color: #666;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+.swal2-confirm {
+  background-color: #007bff!important;  /* Cambia el color de fondo */
+  color: white !important;               /* Color del texto */
+  border: none !important;               /* Sin borde */
+  border-radius: 48px !important;         /* Bordes redondeados */
+  padding: 11px 32px !important;         /* Espaciado */
+  font-size: 15px !important;            /* Tamaño de la fuente */
+}
+
+.swal2-cancel{
+  border-radius: 60px!important;
+}
+
+.flecha img{
+  width: 48px;
+  margin: 23px 0px 0px 23px;
+}

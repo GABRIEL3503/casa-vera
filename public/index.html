@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogo Digital</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Catalogo Digital">
+  <meta property="og:description" content="Soluciones digitales">
+  
+  <!-- Etiqueta para la imagen -->
+  <meta property="og:image" content="https://octopus-app.com.ar/carta/img/Carta-Digital-Logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,301,400,401,500,501,700,701,900,901,1,2&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+  <!-- Loader -->
+
+
+  <nav class="navbar">
+    <div class="navbar-logo"><img src="img/LogoAnicetaNav.png" alt="">    <p>MENÚ</p>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+  </div>
+  <div class="navbar-links" id="navbar-links">
+      <!-- Los enlaces de las secciones del menú se cargarán dinámicamente aquí -->
+  </div>
+  </nav>
+  
+  <div class="container">
+    <!-- <img src="img/FileteIzqArriba.png" class="corner top-left" alt="Top Left">
+    <img src="img/FiletesDerArriba.png" class="corner top-right" alt="Top Right">
+    <img src="img/Filet-izquierdo-abaj.png" class="corner bottom-left" alt="Bottom Left">
+    <img src="img/filete-derech-abaj.png" class="corner bottom-right" alt="Bottom Right"> -->
+    <div class="image-container">
+      <img class="puff-in-center" src="img/LogoAnicetaInicio.png" alt="Imagen del Restaurante" id="animatedElement">
+    </div>
+    <span class="redes-iconos">
+      <a target="_blank" href=""><img src="img/UbiIcon.png" alt=""></a>
+      <a target="_blank" href="https://api.whatsapp.com/send?phone=5492995951522"><img src="img/WppIcon.png" alt=""></a>
+      <a target="_blank" href="https://www.facebook.com/profile.php?id=1000"><img src="img/FaceIcon.png" alt=""></a>
+      <a target="_blank" href="https://www.instagram.com/"><img src="img/IGIcon.png" alt=""></a>
+
+    </span>
+    <div class="arrow-container" onclick="scrollToGroupTitle()">
+      <img src="img/BotónDelizarInicio.png" alt="Flecha">
+  </div>
+    <span class="container-botones">
+      <span class="contenedoruno" >
+    <button  id="create-item-button" class="edit-button auth-required"><img src="img/mas.png" alt=""> Nuevo</button>
+  </span>
+    <button id="create-announcement-button" class="edit-button auth-required"><img src="img/anunc.png" alt="">Anuncio</button>
+    <button id="edit-delivery-price-button" class="edit-button auth-required"><img src="img/money.png" alt="">Envío</button>
+  </span>
+    <div class="footer-left">
+      <span class="social-footer">
+        <img  src="img/LogoAnicetaRedes.png" alt="Logo" class="logo">
+        <div class="social-icons">
+          <a href="https://www.facebook.com/profile.php?id=100064243615358"><img class="faceb" src="img/icons8-facebook-48.png" alt="Instagram"></a>
+
+              <a href="https://www.instagram.com/aniceta.showroom/"><img src="img/instagram.png" alt="Instagram"></a>
+            </div>
+          </span>
+          <a href="https://maps.app.goo.gl/E3HXWfopMvgSEcqPA">  <p>C H Rodriguez 543</p></a>            <span>
+              <button id="login-button">Iniciar Sesión</button>
+              <button id="logout-button" class="auth-required">Cerrar Sesión</button>
+            </span>
+          </div>
+
+  </div>
+
+<!-- Botón flotante para el carrito -->
+<button id="cart-button" class="floating-cart-btn">
+  <img src="img/CarritoIcon.png" alt=""> <p>Pedido</p>
+</button>
+
+<button id="scrollToTopButton" class="scroll-button" onclick="scrollToTop()">
+  <img src="img/chevron-up-regular-48.png" alt="Subir">
+</button>
+
+<button id="scrollToBottomButton" class="scroll-button" onclick="scrollToBottom()">
+  <img src="img/chevron-down-regular-48.png" alt="Bajar">
+</button>
+ <footer>
+      <div class="contain-foot-uno"> <img src="img/Catálogo Digital App.png" alt="">
+          <p>Todos los derechos reservados</p>
+      </div>
+      <div class="contain-foot-dos"> <span class="foot-link">
+              <p>Enterate más </p><a target="_blank" href="https://www.instagram.com/octopus_apps/">@octopus_apps</a>
+          </span>
+          <a class="web-link" target="_blank" style="text-decoration: none;" href="https://octopuswebdesign.com.ar/">
+              www.octopuswebdesign.com.ar
+          </a>
+          <p>Copyright © 2024</p>
+      </div>
+  </footer>
+  <div id="loader">
+    <div class="loading-gif"> 
+        <img class="flip-in-ver-left  pic" src="img/Pictograma.png" alt="Loader Icon">
+    </div>
+    <span>
+    <img src="img/LogoCatalogo para loader.png" alt="App Logo">
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    <img class="img-load" src="img/Octopus loader.png" alt="Extra Loader Image">
+  </span>
+  </div>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+      <script src="https://sdk.mercadopago.com/js/v2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.1/dist/compressor.min.js"></script>
+
+      <script src="script.js"></script>
+      <script src="scriptadmin.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+      <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+</body>
+
+</html>

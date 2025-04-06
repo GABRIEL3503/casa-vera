@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <title>Administración de Pedidos</title>
+   <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <span class="flecha"> <a href="https://octopus-app.com.ar/aniceta/"><img src="img/arrow_back_24dp_007BFF_FILL0_wght400_GRAD0_opsz24.png" alt=""></a> </span>
+    <div class="container">
+        <h1 style="text-align: center;">Pedidos</h1>
+        <div class="order-list" id="orderList">
+            <!-- Orders will be populated here -->
+        </div>
+    </div>
+
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalles del Pedido</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="order-details" id="orderDetails"></div>
+        </div>
+    </div>
+    <footer>
+        <div class="contain-foot-uno"> <img src="img/Catálogo Digital App.png" alt="">
+            <p>Todos los derechos reservados</p>
+        </div>
+        <div class="contain-foot-dos"> <span class="foot-link">
+                <p>Enterate más </p><a target="_blank" href="https://www.instagram.com/octopus_apps/">@octopus_apps</a>
+            </span>
+            <a class="web-link" target="_blank" style="text-decoration: none;" href="https://octopuswebdesign.com.ar/">
+                www.octopuswebdesign.com.ar
+            </a>
+            <p>Copyright © 2024</p>
+        </div>
+    </footer>
+<script src="scriptadmin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+</body>
+</html>
