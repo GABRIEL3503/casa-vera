@@ -2,10 +2,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const style = document.createElement("style");
   style.innerHTML = `
-    .talle-wrapper, .talle-select, .color-select {
-      display: none !important;
-    }
-  `;
+  .talle-wrapper,
+  .talle-select,
+  .color-select,
+  #stock-section {
+    display: none !important;
+  }
+`;
+
   document.head.appendChild(style);
 });
 
