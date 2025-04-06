@@ -1,3 +1,13 @@
+// Oculta las selecciones de talle y color al renderizar productos
+document.addEventListener("DOMContentLoaded", () => {
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .talle-wrapper, .talle-select, .color-select {
+      display: none !important;
+    }
+  `;
+  document.head.appendChild(style);
+});
 
 let menuItemsPromise = null;
 let menuSectionsPromise = null;
