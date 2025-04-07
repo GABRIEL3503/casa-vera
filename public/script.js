@@ -1251,50 +1251,21 @@ section.insertBefore(newItem, afterTitle || null);
   function addToCart(productId, productName, productPrice) {
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
     const productElement = document.querySelector(`.menu-item[data-id="${productId}"]`);
-
+  
     if (!productElement) {
       console.warn(`Producto con ID ${productId} no encontrado en el DOM.`);
       return;
     }
-
-    // Obtener elementos de selección de talle y color
-    const talleElement = productElement.querySelector('.talle-select');
-    const colorElement = productElement.querySelector('.color-select');
-
-    // Validar selección de talle si hay opciones disponibles
-    if (talleElement && talleElement.options.length > 1 && !talleElement.value) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Selecciona un talle',
-        text: 'Debes elegir un talle antes de continuar.',
-        confirmButtonText: 'Aceptar',
-        customClass: { popup: 'mi-alerta-personalizada' }
-      });
-      return;
-    }
-
-    // Validar selección de color si hay opciones disponibles
-    if (colorElement && colorElement.options.length > 1 && !colorElement.value) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Selecciona un color',
-        text: 'Debes elegir un color antes de continuar.',
-        confirmButtonText: 'Aceptar',
-        customClass: { popup: 'mi-alerta-personalizada' }
-      });
-      return;
-    }
-
-    // Obtener valores seleccionados o asignar valores predeterminados
-    const selectedTalle = talleElement?.value || 'sin-talle';
-    const selectedColor = colorElement?.value || 'sin-color';
-
+  
+    const selectedTalle = 'sin-talle';
+    const selectedColor = 'sin-color';
+  
     const menuSection = productElement.closest('.menu-section');
     const sectionName = menuSection ? menuSection.getAttribute('data-type') : '';
-
+  
     let mainTitle = '';
     let current = productElement.previousElementSibling;
-
+  
     if (productElement.querySelector('.item-title.porciones-title')) {
       while (current) {
         const titleElement = current.querySelector('.item-title:not(.porciones-title)');
@@ -1305,14 +1276,13 @@ section.insertBefore(newItem, afterTitle || null);
         current = current.previousElementSibling;
       }
     }
-
+  
     const finalProductName = `${sectionName} ${mainTitle} ${productName}`.trim();
     const productKey = `${productId}-${selectedTalle}-${selectedColor}`;
-
+  
     if (cart[productKey]) {
       cart[productKey].quantity += 1;
       cart[productKey].totalPrice = cart[productKey].price * cart[productKey].quantity;
-      console.log(`Producto existente en carrito. Cantidad actualizada a: ${cart[productKey].quantity}`);
     } else {
       cart[productKey] = {
         id: productId,
@@ -1323,14 +1293,12 @@ section.insertBefore(newItem, afterTitle || null);
         talle: selectedTalle,
         color: selectedColor
       };
-      console.log(`Producto nuevo agregado al carrito:`, cart[productKey]);
     }
-
+  
     localStorage.setItem('cart', JSON.stringify(cart));
-    console.log(`Carrito actualizado en localStorage:`, cart);
     showToast(finalProductName);
   }
-
+  
 
   // Asignar el evento `click` una sola vez para evitar duplicados
   document.addEventListener("DOMContentLoaded", function () {
