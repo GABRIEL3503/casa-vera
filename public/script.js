@@ -852,10 +852,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const deliveryMethod = document.querySelector('input[name="delivery-method"]:checked')?.value || 'pickup';
     const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value || 'No especificado';
 
-    let orderDetails = ` *Hola, quiero realizar mi pedido.*\n\n`;
+    let orderDetails = `*Hola, quiero realizar mi pedido.*\n\n`;
     orderDetails += `🛒 *Nro:* *${orderId}*\n`;
     orderDetails += `📅 ${formattedDate}\n`;
     orderDetails += `🛵 *Envío:* ${deliveryMethod === 'delivery' ? 'Envío a domicilio' : 'Retiro en local'}\n`;
+    
 
     let address = '';
     if (deliveryMethod === 'delivery') {
@@ -876,7 +877,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Producto inválido:", product);
         return null;
       }
-
+      
+      
       // Extraer `product_id`, `talle`, `color` desde la clave '18-4-verde'
       const [productId, talle, color] = key.split('-');
 
@@ -884,7 +886,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const talleText = talle ? `Talle: *${talle}*` : 'Talle: *N/A*';
       const colorText = color ? `Color: *${color}*` : 'Color: *N/A*';
 
-      orderDetails += `- 👕 *${product.name}* (${talleText}, ${colorText}) x${product.quantity} - *$${formatPrice(product.price * product.quantity)}*\n`;
+      orderDetails += `- 🍽️ *${product.name}* x${product.quantity} - *$${formatPrice(product.price * product.quantity)}*\n`;
 
       return {
         product_id: parseInt(productId),
@@ -2324,6 +2326,7 @@ function scrollToGroupTitle() {
   }
 }
 menuSectionsPromise = loadMenuSections();
+
 function handleScrollForButtons() {
   const cartButton = document.getElementById('cart-button');
   const scrollToTopButton = document.getElementById('scrollToTopButton');
