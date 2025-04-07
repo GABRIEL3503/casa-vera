@@ -69,7 +69,7 @@ const PARENT_GROUPS = [
     title: '',
     description: ''
   },
-  
+
 ];
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -541,13 +541,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderMenuItems(menuData) {
     const container = document.querySelector('.container');
-  
+
     container.querySelectorAll('.menu-section').forEach(section => section.remove());
     container.querySelectorAll('.menu-group').forEach(group => group.remove());
-  
+
     const isAuthenticated = !!localStorage.getItem('jwt_casa-vera');
     const lastCreatedId = localStorage.getItem('lastCreatedItemId');
-  
+
     const parentContainers = PARENT_GROUPS.reduce((containers, group) => {
       const groupContainer = document.createElement('div');
       groupContainer.className = 'menu-group';
@@ -575,7 +575,7 @@ document.addEventListener("DOMContentLoaded", function () {
     menuData.forEach(item => {
       const parentGroup = item.parent_group || 'seccionunica';
       const sectionKey = `${parentGroup}-${item.tipo}`;
-  
+
       if (!sections[sectionKey]) {
         const menuSection = document.createElement('div');
         menuSection.className = 'menu-section';
@@ -586,51 +586,51 @@ document.addEventListener("DOMContentLoaded", function () {
             <span>${capitalizeFirstLetter(item.tipo.toLowerCase())}</span>
           </h2>
         `;
-  
+
         sections[sectionKey] = menuSection;
         parentContainers[parentGroup].appendChild(menuSection);
       }
-  
+
       const newItem = createMenuItem(item);
       newItem.dataset.id = item.id;
       newItem.dataset.hidden = item.hidden;
-  
+
       const menuItem = newItem.querySelector('.menu-item');
-  
+
       const buttonsContainer = document.createElement('span');
       buttonsContainer.className = 'admin-buttons-container';
-  
+
       const editButton = menuItem.querySelector('.edit-button');
       if (editButton) buttonsContainer.appendChild(editButton);
-  
+
       const hideShowButton = document.createElement('button');
       hideShowButton.className = 'hide-show-button auth-required';
       hideShowButton.textContent = item.hidden ? 'Mostrar' : 'Ocultar';
       hideShowButton.addEventListener('click', () => toggleVisibility(newItem, hideShowButton));
       buttonsContainer.appendChild(hideShowButton);
-  
+
       menuItem.appendChild(buttonsContainer);
-  
+
       if (item.hidden) {
         newItem.style.display = isAuthenticated ? 'block' : 'none';
         newItem.style.opacity = isAuthenticated ? '0.3' : '1';
       }
-  
-// Insertar como primer hijo visible después del título
-const section = sections[sectionKey];
-const afterTitle = section.querySelector('h2.section-title')?.nextSibling;
-section.insertBefore(newItem, afterTitle || null);
-  
-    
+
+      // Insertar como primer hijo visible después del título
+      const section = sections[sectionKey];
+      const afterTitle = section.querySelector('h2.section-title')?.nextSibling;
+      section.insertBefore(newItem, afterTitle || null);
+
+
     });
-  
+
     checkAuthentication();
     const tipo = localStorage.getItem('lastCreatedItemTipo');
     const grupo = localStorage.getItem('lastCreatedItemGrupo');
-    
+
     if (tipo && grupo) {
       const targetSelector = `.menu-group[data-group="${grupo}"] .menu-section[data-type="${tipo}"]`;
-    
+
       const waitForOffset = (callback) => {
         const section = document.querySelector(targetSelector);
         if (section && section.offsetTop > 0) {
@@ -645,16 +645,16 @@ section.insertBefore(newItem, afterTitle || null);
           requestAnimationFrame(() => waitForOffset(callback));
         }
       };
-    
+
       waitForOffset(() => {
         if (typeof AOS !== 'undefined') {
           AOS.refresh(); // ⚡ Solo después del scroll
         }
       });
     }
-    
-  } 
-  
+
+  }
+
 
 
   function loadTallesForItem(itemId) {
@@ -664,12 +664,12 @@ section.insertBefore(newItem, afterTitle || null);
         const talleSelect = document.querySelector(`.menu-item[data-id="${itemId}"] .talle-select`);
         const colorSelect = document.querySelector(`.menu-item[data-id="${itemId}"] .color-select`);
         if (!talleSelect) return;
-  
+
         talleSelect.innerHTML = '<option value="" disabled selected>Talle</option>';
         if (colorSelect) {
           colorSelect.innerHTML = '<option value="" disabled selected>Color</option>';
         }
-  
+
         const stockMap = tallesData.data || {};
         Object.keys(stockMap).forEach(talle => {
           const tieneStock = stockMap[talle].some(item => item.cantidad > 0);
@@ -680,12 +680,12 @@ section.insertBefore(newItem, afterTitle || null);
             talleSelect.appendChild(option);
           }
         });
-  
+
         // Actualizar colores al cambiar talle
         talleSelect.addEventListener('change', function () {
           const seleccionado = this.value;
           if (!colorSelect || !stockMap[seleccionado]) return;
-  
+
           colorSelect.innerHTML = '<option value="" disabled selected>Color</option>';
           stockMap[seleccionado].forEach(({ color }) => {
             const opt = document.createElement('option');
@@ -697,7 +697,7 @@ section.insertBefore(newItem, afterTitle || null);
       })
       .catch(err => console.error('Error cargando talles:', err));
   }
-  
+
 
   function createMenuItem(item) {
     const imageUrl = item.img_url || '';
@@ -753,7 +753,7 @@ section.insertBefore(newItem, afterTitle || null);
         });
       }
     });
-    
+
     // Mapeo de stock para almacenar colores disponibles por talle
     let stockMap = {};
 
@@ -796,7 +796,7 @@ section.insertBefore(newItem, afterTitle || null);
       });
 
     contenedorItems.appendChild(newItem);
-    
+
     return contenedorItems;
   }
 
@@ -994,14 +994,14 @@ section.insertBefore(newItem, afterTitle || null);
             cartContent += `<h3 class="nombre-seccion">${formattedSectionName}</h3>`;
 
             sections[sectionName].forEach(product => {
-              const productTalle = product.talle ? `T: ${product.talle}` : '';
-              const productColor = product.color && product.color !== 'sin-color' ? `, C: ${product.color}` : '';
+              const productTalle = '';  // 🔥 Talle oculto
+              const productColor = '';  // 🔥 Color oculto
               const productTotalPrice = formatPrice((product.totalPrice || 0).toFixed(2));
 
               cartContent += `
                 <div class="cart-item" data-id="${product.id}" data-talle="${product.talle || 'sin-talle'}" data-color="${product.color || 'sin-color'}">
                   <span class="container-uno"> 
-                    <span class="detalles"><strong>${product.name} (${productTalle}${productColor})</strong></span> 
+                    <span class="detalles"><strong>${product.name}</strong></span> 
                     <span>
                       <button class="quantity-btn" data-action="decrease">-</button>
                       <input type="number" value="${product.quantity}" min="1" class="quantity-input" readonly>
@@ -1251,21 +1251,21 @@ section.insertBefore(newItem, afterTitle || null);
   function addToCart(productId, productName, productPrice) {
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
     const productElement = document.querySelector(`.menu-item[data-id="${productId}"]`);
-  
+
     if (!productElement) {
       console.warn(`Producto con ID ${productId} no encontrado en el DOM.`);
       return;
     }
-  
+
     const selectedTalle = 'sin-talle';
     const selectedColor = 'sin-color';
-  
+
     const menuSection = productElement.closest('.menu-section');
     const sectionName = menuSection ? menuSection.getAttribute('data-type') : '';
-  
+
     let mainTitle = '';
     let current = productElement.previousElementSibling;
-  
+
     if (productElement.querySelector('.item-title.porciones-title')) {
       while (current) {
         const titleElement = current.querySelector('.item-title:not(.porciones-title)');
@@ -1276,10 +1276,10 @@ section.insertBefore(newItem, afterTitle || null);
         current = current.previousElementSibling;
       }
     }
-  
+
     const finalProductName = `${sectionName} ${mainTitle} ${productName}`.trim();
     const productKey = `${productId}-${selectedTalle}-${selectedColor}`;
-  
+
     if (cart[productKey]) {
       cart[productKey].quantity += 1;
       cart[productKey].totalPrice = cart[productKey].price * cart[productKey].quantity;
@@ -1294,11 +1294,11 @@ section.insertBefore(newItem, afterTitle || null);
         color: selectedColor
       };
     }
-  
+
     localStorage.setItem('cart', JSON.stringify(cart));
     showToast(finalProductName);
   }
-  
+
 
   // Asignar el evento `click` una sola vez para evitar duplicados
   document.addEventListener("DOMContentLoaded", function () {
@@ -1334,32 +1334,32 @@ section.insertBefore(newItem, afterTitle || null);
   function updateMenuItemDOM(data) {
     const el = document.querySelector(`.menu-item[data-id="${data.id}"]`);
     if (!el) return;
-  
+
     el.querySelector('.item-title').textContent = data.nombre;
     el.querySelector('.item-price').textContent = `$${formatPrice(data.precio)}`;
     el.querySelector('.item-description').textContent = data.descripcion;
-  
+
     const img = el.querySelector('.item-header img');
     if (img && data.img_url) {
       const currentSrc = img.getAttribute('src');
       const newSrc = data.img_url;
-  
+
       // Verificamos si la imagen realmente cambió (por nombre o timestamp)
       if (!currentSrc.endsWith(newSrc)) {
         img.classList.add('fade-transition');
         img.style.opacity = 0;
-  
+
         img.onload = () => {
           img.style.opacity = 1;
           img.classList.remove('fade-transition');
         };
-  
+
         img.setAttribute('src', newSrc);
       }
     }
   }
-  
-  
+
+
   document.body.addEventListener('click', async function (event) {
     if (event.target.classList.contains('edit-button')) {
       const itemElement = event.target.closest('.menu-item');
@@ -1421,16 +1421,16 @@ section.insertBefore(newItem, afterTitle || null);
               document.getElementById('new-talle').value = li.dataset.talle;
               document.getElementById('new-color').value = li.dataset.color;
               document.getElementById('new-cantidad').value = li.dataset.cantidad;
-          
+
               // ⚠️ Remover este bloque, ya no eliminamos directamente
               // stockArray = stockArray.filter((item) => item.id !== parseInt(li.dataset.id, 10));
               // li.remove();
-          
+
               // ✅ En lugar de eliminar, solo marcamos para edición
               document.getElementById('add-stock-btn').dataset.editingId = li.dataset.id;
             });
           });
-          
+
 
           stockList.querySelectorAll('.delete-stock-btn').forEach((btn) => {
             btn.addEventListener('click', (event) => {
@@ -1446,7 +1446,7 @@ section.insertBefore(newItem, afterTitle || null);
 
         const originalTipo = itemType;
         const originalGroup = currentParentGroup;
-        
+
 
         // ✅ Abrir el modal de edición con SweetAlert2
         Swal.fire({
@@ -1501,7 +1501,7 @@ section.insertBefore(newItem, afterTitle || null);
               const color = document.getElementById('new-color').value.trim();
               const cantidad = parseInt(document.getElementById('new-cantidad').value.trim(), 10);
               const editingId = this.dataset.editingId;
-            
+
               if (talle && color && !isNaN(cantidad) && cantidad >= 0) {
                 if (editingId) {
                   const index = stockArray.findIndex((item) => item.id === parseInt(editingId, 10));
@@ -1511,21 +1511,21 @@ section.insertBefore(newItem, afterTitle || null);
                 } else {
                   stockArray.push({ id: Date.now(), talle, color, cantidad });
                 }
-            
+
                 // Limpiar
                 document.getElementById('new-talle').value = '';
                 document.getElementById('new-color').value = '';
                 document.getElementById('new-cantidad').value = '';
                 this.removeAttribute('data-editing-id');
-            
+
                 // 🔁 Ahora sí actualiza
                 renderStockList();
               } else {
                 Swal.fire('Error', 'Por favor, ingresa valores válidos.', 'error');
               }
             });
-            
-            
+
+
 
 
             // ✅ Escuchar cambios para actualizar opciones según el grupo padre
@@ -1536,9 +1536,9 @@ section.insertBefore(newItem, afterTitle || null);
                 .filter((s) => s.parent_group === groupId)
                 .map((s) => `<option value="${s.nombre}">${s.nombre}</option>`)
                 .join('');
-            });const imageInput = document.getElementById('swal-image-upload');
+            }); const imageInput = document.getElementById('swal-image-upload');
             const previewImg = document.querySelector('.swal2-html-container img');
-            
+
             imageInput.addEventListener('change', () => {
               const file = imageInput.files[0];
               if (file && previewImg) {
@@ -1552,8 +1552,8 @@ section.insertBefore(newItem, afterTitle || null);
                 reader.readAsDataURL(file);
               }
             });
-            
-            
+
+
           }
         }).then(async (result) => {
           if (result.isConfirmed) {
@@ -1563,10 +1563,10 @@ section.insertBefore(newItem, afterTitle || null);
             const tipo = document.getElementById('swal-input3').value;
             const parent_group = document.getElementById('swal-parent-group').value;
             const img_url = document.querySelector('.swal2-popup img')?.src || '';
-        
+
             const tipoCambiado = tipo !== originalTipo;
             const grupoCambiado = parent_group !== originalGroup;
-        
+
             const formData = new FormData();
             formData.append('nombre', nombre);
             formData.append('precio', precio);
@@ -1574,14 +1574,14 @@ section.insertBefore(newItem, afterTitle || null);
             formData.append('tipo', tipo);
             formData.append('parent_group', parent_group);
             formData.append('stock', JSON.stringify(stockArray));
-        
+
             const imageInput = document.getElementById('swal-image-upload');
             if (imageInput.files.length > 0) {
               const compressedImage = await compressImage(imageInput.files[0], 0.7, 800, 600);
               const compressedFile = new File([compressedImage], 'imagen.webp', { type: 'image/webp' });
               formData.append('imagen', compressedFile);
             }
-        
+
             fetch(`https://octopus-app.com.ar/casa-vera/api/menu/${itemId}`, {
               method: 'PUT',
               body: formData
@@ -1597,16 +1597,16 @@ section.insertBefore(newItem, afterTitle || null);
                     loadTallesForItem(itemId);
                     const updatedImgUrl = data.img_url || img_url;
                     updateMenuItemDOM({ id: itemId, nombre, precio, descripcion, img_url: updatedImgUrl });
-                  
+
                     Swal.fire('Elemento actualizado', '', 'success');
                   }
-                  
+
                 } else {
                   Swal.fire('Error', 'No se pudo actualizar.', 'error');
                 }
               });
           }
-          
+
         });
       });
     }
@@ -1652,7 +1652,7 @@ section.insertBefore(newItem, afterTitle || null);
 
   function deleteProduct(productId) {
     console.log("Ejecutando deleteProduct para ID:", productId);
-  
+
     fetch(`https://octopus-app.com.ar/casa-vera/api/menu/${productId}`, {
       method: "DELETE",
       headers: {
@@ -1663,7 +1663,7 @@ section.insertBefore(newItem, afterTitle || null);
       .then(response => response.json())
       .then(data => {
         console.log("Respuesta del servidor:", data);
-  
+
         if (data.deleted > 0) {
           // ✅ Eliminar el elemento del DOM directamente
           const itemEl = document.querySelector(`.menu-item[data-id="${productId}"]`);
@@ -1671,7 +1671,7 @@ section.insertBefore(newItem, afterTitle || null);
             const wrapper = itemEl.closest('.contenedor-items');
             if (wrapper) wrapper.remove();
           }
-  
+
           Swal.fire("Eliminado", "El producto ha sido eliminado correctamente.", "success");
         } else {
           Swal.fire("Error", "No se pudo eliminar el producto.", "error");
@@ -1682,7 +1682,7 @@ section.insertBefore(newItem, afterTitle || null);
         Swal.fire("Error", "Hubo un problema al eliminar el producto.", "error");
       });
   }
-  
+
 
 
   function compressImage(file, quality = 0.85, maxWidth = 1000, maxHeight = 1000) {
@@ -1820,12 +1820,12 @@ section.insertBefore(newItem, afterTitle || null);
           if (result.isConfirmed) {
             const formData = result.value;
             const tipo = document.getElementById('swal-input3').value;
-const selectedParentGroup = document.getElementById('swal-parent-group').value;
+            const selectedParentGroup = document.getElementById('swal-parent-group').value;
 
-localStorage.setItem('lastCreatedItemTipo', tipo);
-localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
+            localStorage.setItem('lastCreatedItemTipo', tipo);
+            localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
 
-            
+
             fetch('https://octopus-app.com.ar/casa-vera/api/menu', {
               method: 'POST',
               body: formData
@@ -1848,9 +1848,9 @@ localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
                     // 👇 Solo recargamos datos
                     fetchMenuDataFromServer();
                   });
-                  
-                  
-                  
+
+
+
                 } else {
                   Swal.fire('Error al crear el ítem', 'No se recibió confirmación de creación', 'error');
                 }
@@ -1859,28 +1859,28 @@ localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
 
           }
         });
-     
+
 
         document.addEventListener('change', function (e) {
           if (e.target.id === 'swal-parent-group') {
             const groupId = e.target.value;
             const sectionSelect = document.getElementById('swal-input3');
             const newSectionHTML = `<option value="new-section">Nueva Categoría</option>`;
-        
+
             // ✅ Verificar si NO se seleccionó ninguna sección
             if (!groupId) {
               sectionSelect.innerHTML = ''; // ❌ Vaciar opciones si no hay grupo seleccionado
               return; // ✅ Salir si no hay grupo seleccionado
             }
-        
+
             // ✅ Obtener opciones filtradas si hay un grupo seleccionado
             const filteredOptions = renderSectionOptions(groupId);
-        
+
             // ✅ Siempre incluir "Nueva Categoría" al final
             sectionSelect.innerHTML = filteredOptions
               ? `${filteredOptions}${newSectionHTML}`
               : newSectionHTML;
-        
+
             // 🔥 Si solo hay "Nueva Categoría", seleccionarla automáticamente y forzar evento change
             if (!filteredOptions || sectionSelect.options.length === 1) {
               sectionSelect.value = 'new-section';
@@ -1888,8 +1888,8 @@ localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
             }
           }
         });
-        
-        
+
+
 
         // Agregar evento para mostrar u ocultar el campo de nueva sección
         document.getElementById('swal-input3').addEventListener('change', function () {
@@ -1979,30 +1979,30 @@ localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
               const paragraphInput = document.getElementById('swal-paragraph');
               const stateInput = document.getElementById('swal-state');
               const fileInput = document.getElementById('swal-image-upload');
-            
+
               // ❗️ Si algún elemento no existe, mostrar error y detener proceso
               if (!textInput || !paragraphInput || !stateInput) {
                 Swal.showValidationMessage('Por favor, completa todos los campos.');
                 return false;
               }
-            
+
               // ✅ Crear y rellenar FormData
               const formData = new FormData();
               formData.append('text', textInput.value.trim());
               formData.append('paragraph', paragraphInput.value.trim());
               formData.append('state', stateInput.checked);
-            
+
               // ✅ Comprimir imagen si existe
               if (fileInput && fileInput.files.length > 0) {
                 const file = fileInput.files[0];
-            
+
                 try {
                   // 🎉 Comprimir la imagen antes de enviarla
                   const compressedBlob = await compressImage(file, 0.7, 800, 600);
                   const compressedFile = new File([compressedBlob], 'compressed-anuncio.webp', {
                     type: 'image/webp',
                   });
-            
+
                   formData.append('image', compressedFile);
                 } catch (err) {
                   console.error('Error al comprimir la imagen:', err);
@@ -2010,11 +2010,11 @@ localStorage.setItem('lastCreatedItemGrupo', selectedParentGroup);
                   return false;
                 }
               }
-            
+
               // ✅ Retornar el FormData comprimido para ser enviado al backend
               return formData;
             }
-            
+
           }).then((result) => {
             if (result.isConfirmed) {
               fetch('https://octopus-app.com.ar/casa-vera/api/announcements', {
@@ -2217,16 +2217,16 @@ function addNavbarLinkEvents() {
       e.preventDefault();
       const groupContainer = this.parentElement;
       const sectionLinks = groupContainer.querySelector('.section-links');
-  
+
       const isVisible = sectionLinks.style.display === 'block';
       sectionLinks.style.display = isVisible ? 'none' : 'block';
-  
+
       // Toggle clase para rotar ícono
       this.classList.toggle('open', !isVisible);
     });
   });
-  
-  
+
+
 }
 function scrollFunction() {
   const navbar = document.querySelector('.navbar'); // Selecciona el navbar
