@@ -81,30 +81,25 @@ function formatPrice(value) {
 }
 
 function checkAuthentication() {
-  const token = localStorage.getItem('jwt_casa-vera');
+  const token = localStorage.getItem('jwt_capullos-de-flor');
   const cartButton = document.getElementById('cart-button');
-  const scrollTopButton = document.getElementById('scrollToBottomButton');
+  // 🔥 Ya no tocamos scrollToBottomButton
 
   if (token) {
-    // Manejo de elementos de administrador
     document.querySelectorAll('.auth-required').forEach((elem) => {
       elem.style.display = 'inline-block';
     });
     document.querySelector('.container-botones').style.display = '';
 
-    // Ocultar el carrito y mostrar scrollToTop para administradores
+    // 🔥 solo ocultar carrito, no el botón de scroll
     if (cartButton) cartButton.style.display = 'none';
-    if (scrollTopButton) scrollTopButton.style.display = 'block';
   } else {
-    // Manejo de elementos de administrador
     document.querySelectorAll('.auth-required').forEach((elem) => {
       elem.style.display = 'none';
     });
     document.querySelector('.container-botones').style.display = 'none';
 
-    // Mostrar el carrito y ocultar scrollToTop para usuarios normales
     if (cartButton) cartButton.style.display = 'flex';
-    if (scrollTopButton) scrollTopButton.style.display = 'none';
   }
 }
 
@@ -2328,17 +2323,18 @@ function scrollToGroupTitle() {
 menuSectionsPromise = loadMenuSections();
 
 function handleScrollForButtons() {
-  const cartButton = document.getElementById('cart-button');
-  const scrollToTopButton = document.getElementById('scrollToTopButton');
-  const scrollToBottomButton = document.getElementById('scrollToBottomButton');
-  const footer = document.querySelector('footer');
-
+  const buttons = [
+    document.getElementById('cart-button'),
+    document.getElementById('scrollToTopButton'),
+    document.getElementById('scrollToBottomButton'),
+  ];
+  const footer = document.getElementById('footer');
   if (!footer) return;
 
   const footerRect = footer.getBoundingClientRect();
   const isFooterVisible = footerRect.top < window.innerHeight;
 
-  [cartButton, scrollToTopButton, scrollToBottomButton].forEach(btn => {
+  buttons.forEach((btn) => {
     if (!btn) return;
     btn.classList.toggle('move-up', isFooterVisible);
   });
@@ -2350,3 +2346,29 @@ window.addEventListener('scroll', handleScrollForButtons);
 // Agregar evento de scroll para detectar el final del scroll
 window.addEventListener('scroll', handleScrollForButtons);
 
+let fraseIndex = 0;
+const fraseElemento = document.getElementById("frase");
+
+function cambiarFrase() {
+  // Oculta la frase actual suavemente
+  fraseElemento.style.opacity = 0;
+  fraseElemento.style.transform = "translateX(-100%)";
+
+  setTimeout(() => {
+    // Cambia la frase después del tiempo de transición
+    fraseIndex = (fraseIndex + 1) % frases.length;
+    fraseElemento.textContent = frases[fraseIndex];
+
+    // Restablece la posición para la nueva frase desde la derecha
+    fraseElemento.style.transform = "translateX(100%)";
+
+    setTimeout(() => {
+      // Muestra la nueva frase entrando desde la derecha
+      fraseElemento.style.opacity = 1;
+      fraseElemento.style.transform = "translateX(0)";
+    }, 50);
+  }, 1000); // Tiempo de espera antes de cambiar la frase
+}
+
+// Inicia el carrusel de frases
+setInterval(cambiarFrase, 4000); // Tiempo total para cambiar frase (4 segundos)

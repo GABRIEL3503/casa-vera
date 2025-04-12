@@ -2320,3 +2320,149 @@ width: auto ;}
 .parent-link.open img {
   transform: rotate(130deg);
 }
+#footer {
+  font-family: "Nunito Sans", sans-serif;
+  background-color: #262626;
+  color: #fff;
+  padding: 32px 20px  12px;
+  text-align: center;
+  position: relative;
+}
+
+/* Contenedor de la frase dinámica */
+.frase-container {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: -18px;
+}
+
+/* Estilos para las frases */
+.frase {
+  color: #FDFFFF  ;
+  font-size: 3.4rem;
+  font-weight: 400;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+/* Contenedor del botón Contactanos */
+.boton-container {
+  margin:  -14px 0px 27px 0;
+}
+
+/* Botones flotantes por defecto */
+#cart-button,
+#scrollToTopButton,
+#scrollToBottomButton {
+  position: fixed;
+  bottom: 20px;
+  z-index: 999;
+  transition: bottom 0.3s ease-in-out;
+}
+
+/* Todos los botones que deben subir al llegar al footer */
+#cart-button.move-up,
+#scrollToTopButton.move-up,
+#scrollToBottomButton.move-up {
+  bottom: 470px; /* Ajustá este valor según la altura del footer */
+}
+
+
+/* Estilo del botón Contactanos */
+.btn-conocenos {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 2.4rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #8537EE , #E24FE4);
+  color: #FDFFFF;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn-conocenos:hover {
+  transform: scale(1.05);
+}
+
+/* Información del footer */
+.footer-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Estilo para el logo en el footer */
+.logo-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.logo-footer img {
+  width: 344px;
+  height: auto;
+}
+
+/* Texto de derechos reservados */
+.footer-info p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #FDFFFF;
+}
+
+/* Estilo de marca Octopus */
+.octopus {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FDFFFF;
+}
+@media (max-width: 768px) {
+
+
+
+  div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+    font-size: 22px;
+  }
+
+  div:where(.swal2-container) button:where(.swal2-styled).swal2-cancel {
+    font-size: 22px;
+
+  }
+
+
+  .navbar-links {
+    width: 100%;
+    right: 0;
+    left: 0;
+  }
+ 
+  .update-button {
+    bottom: 100px;
+    right: 15px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+.btn-conocenos {
+  padding: 18px 188px;
+font-size: 2.1rem;
+}
+
+.logotip{
+  width:  224px}
+ 
+  .scroll-button.on-footer {
+    bottom: 100px; /* sube el botón */
+    transition: bottom 0.3s ease;
+  }
+  
