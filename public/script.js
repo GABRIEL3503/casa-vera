@@ -81,7 +81,7 @@ function formatPrice(value) {
 }
 
 function checkAuthentication() {
-  const token = localStorage.getItem('jwt_capullos-de-flor');
+  const token = localStorage.getItem('jwt_casa-vera');
   const cartButton = document.getElementById('cart-button');
   // 🔥 Ya no tocamos scrollToBottomButton
 
