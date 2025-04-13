@@ -2341,7 +2341,7 @@ width: auto ;}
 
 /* Estilos para las frases */
 .frase {
-  color: #FDFFFF  ;
+  color: #FDFFFF!important  ;
   font-size: 3.4rem;
   font-weight: 400;
   white-space: nowrap;
@@ -2351,7 +2351,9 @@ width: auto ;}
   opacity: 1;
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
-
+.footer-info p{
+  color: white!important;
+}
 /* Contenedor del botón Contactanos */
 .boton-container {
   margin:  -14px 0px 27px 0;

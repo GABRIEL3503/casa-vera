@@ -2345,7 +2345,10 @@ window.addEventListener('scroll', handleScrollForButtons);
 
 // Agregar evento de scroll para detectar el final del scroll
 window.addEventListener('scroll', handleScrollForButtons);
-
+const frases = [
+  "Vos también podés digitalizarte",
+  "Sumate a la Comunidad Octopus",
+];
 let fraseIndex = 0;
 const fraseElemento = document.getElementById("frase");
 
