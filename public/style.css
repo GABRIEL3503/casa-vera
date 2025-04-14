@@ -1111,9 +1111,12 @@ footer a {
 }
 
 .social-footer {
-  display: flex;
-  align-content: center;
-  align-items: center;
+  display: flex
+  ;
+      gap: 22px;
+      align-content: center;
+      align-items: center;
+      flex-direction: column;
 }
 
 @media (max-width: 768px) {
