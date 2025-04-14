@@ -1060,26 +1060,27 @@ function getMonthRange(offset = 0) {
 // POST /visitas
 baseRouter.post('/visitas', (req, res) => {
   const db = ensureDatabaseConnection();
+  const ip = req.ip;
+  const userAgent = req.headers['user-agent'] || 'unknown';
+  const identificador = `${ip}-${userAgent}`;
   const fecha = new Date().toISOString().split('T')[0];
 
-  console.log('📩 Visita recibida');
-  console.log('🧠 HEADERS:', req.headers);
-  console.log('🔁 req.ip:', req.ip);
-  console.log('🔁 req.connection.remoteAddress:', req.connection?.remoteAddress);
-  console.log('🔁 X-Forwarded-For:', req.headers['x-forwarded-for']);
+  db.get(
+    `SELECT 1 FROM visitas WHERE ip = ? AND fecha = ?`,
+    [identificador, fecha],
+    (err, row) => {
+      if (err) return res.status(500).json({ error: err.message });
 
-  const ip = req.ip;
+      if (!row) {
+        db.run(`INSERT INTO visitas (ip, fecha) VALUES (?, ?)`, [identificador, fecha]);
+      }
 
-  db.get(`SELECT 1 FROM visitas WHERE ip = ? AND fecha = ?`, [ip, fecha], (err, row) => {
-    if (err) return res.status(500).json({ error: err.message });
-
-    if (!row) {
-      db.run(`INSERT INTO visitas (ip, fecha) VALUES (?, ?)`, [ip, fecha]);
+      res.json({ ok: true });
     }
-
-    res.json({ ok: true });
-  });
+  );
 });
+
+
 
 
 // GET /visitas
