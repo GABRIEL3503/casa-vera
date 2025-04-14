@@ -2504,3 +2504,16 @@ font-size: 2.1rem;
     background: none;
     text-decoration: underline;
     border: none;  }
+
+    #vistas h2 {
+      font-size: 40px;
+    }
+    #vistas h3 {
+      font-size: 34px;
+    }
+    #vistas{
+      padding: 30px;
+      border: 1px solid #ccc;
+      margin-top: 1rem;
+      border-radius: 30px;
+    }
