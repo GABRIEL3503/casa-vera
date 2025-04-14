@@ -1057,9 +1057,12 @@ function getMonthRange(offset = 0) {
 
 // POST /visitas
 baseRouter.post('/visitas', (req, res) => {
+  console.log("📩 Visita recibida");
+
   const db = ensureDatabaseConnection(); // <== ✅ CORRECTO
   const ip = getClientIp(req);
   const fecha = new Date().toISOString().split('T')[0];
+  console.log(`👤 IP: ${ip} - Fecha: ${fecha}`);
 
   db.get(`SELECT 1 FROM visitas WHERE ip = ? AND fecha = ?`, [ip, fecha], (err, row) => {
     if (err) return res.status(500).json({ error: err.message });
