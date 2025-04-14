@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import fs from 'fs'; 
 
 const app = express();
-app.set('trust proxy', true); // ⬅️ Habilita detección de IP real detrás de proxy
+app.set('trust proxy', true);
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -1059,12 +1059,16 @@ function getMonthRange(offset = 0) {
 
 // POST /visitas
 baseRouter.post('/visitas', (req, res) => {
-  console.log("📩 Visita recibida");
-
-  const db = ensureDatabaseConnection(); // <== ✅ CORRECTO
-  const ip = getClientIp(req);
+  const db = ensureDatabaseConnection();
   const fecha = new Date().toISOString().split('T')[0];
-  console.log(`👤 IP: ${ip} - Fecha: ${fecha}`);
+
+  console.log('📩 Visita recibida');
+  console.log('🧠 HEADERS:', req.headers);
+  console.log('🔁 req.ip:', req.ip);
+  console.log('🔁 req.connection.remoteAddress:', req.connection?.remoteAddress);
+  console.log('🔁 X-Forwarded-For:', req.headers['x-forwarded-for']);
+
+  const ip = req.ip;
 
   db.get(`SELECT 1 FROM visitas WHERE ip = ? AND fecha = ?`, [ip, fecha], (err, row) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -1076,6 +1080,7 @@ baseRouter.post('/visitas', (req, res) => {
     res.json({ ok: true });
   });
 });
+
 
 // GET /visitas
 baseRouter.get('/visitas', (req, res) => {
