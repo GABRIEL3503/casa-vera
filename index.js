@@ -1055,8 +1055,9 @@ function getMonthRange(offset = 0) {
   };
 }
 
-// Ruta: POST /visitas
+// POST /visitas
 baseRouter.post('/visitas', (req, res) => {
+  const db = ensureDatabaseConnection(); // <== ✅ CORRECTO
   const ip = getClientIp(req);
   const fecha = new Date().toISOString().split('T')[0];
 
@@ -1071,8 +1072,10 @@ baseRouter.post('/visitas', (req, res) => {
   });
 });
 
-// Ruta: GET /visitas
+// GET /visitas
 baseRouter.get('/visitas', (req, res) => {
+  const db = ensureDatabaseConnection(); // <== ✅ CORRECTO
+
   const current = getMonthRange(0);
   const prev = getMonthRange(-1);
 
