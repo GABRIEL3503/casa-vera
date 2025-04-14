@@ -1167,24 +1167,14 @@ footer a {
 }
 
 
-.container-botonesuno {
+.container-botones {
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-.container-botones {
-  margin: 96px 0px;
-  padding: 140px 80px;
-  background-color: #6f6f6f61;
-  align-items: center;
-  display: flex
-;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+
 
 .container-botones button {
   align-items: center;
