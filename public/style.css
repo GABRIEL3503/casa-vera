@@ -1770,7 +1770,7 @@ input[type="radio"]:checked::before {
 }
 .arrow-container {
   position: sticky;
-  margin-top: 190px;
+  margin-top: 178px;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
