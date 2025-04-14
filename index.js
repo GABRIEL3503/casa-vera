@@ -1059,3 +1059,66 @@ baseRouter.get('/api/menuVersion', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+
+// Obtener IP del visitante
+function getClientIp(req) {
+  return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+}
+
+// Obtener rangos de fecha para mes actual y anterior
+function getMonthRange(offset = 0) {
+  const d = new Date();
+  d.setMonth(d.getMonth() + offset, 1);
+  d.setHours(0, 0, 0, 0);
+  const start = new Date(d);
+  d.setMonth(d.getMonth() + 1);
+  const end = new Date(d);
+  return {
+    start: start.toISOString().split('T')[0],
+    end: end.toISOString().split('T')[0]
+  };
+}
+
+// Ruta: POST /visitas
+baseRouter.post('/visitas', (req, res) => {
+  const ip = getClientIp(req);
+  const fecha = new Date().toISOString().split('T')[0];
+
+  db.get(`SELECT 1 FROM visitas WHERE ip = ? AND fecha = ?`, [ip, fecha], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    if (!row) {
+      db.run(`INSERT INTO visitas (ip, fecha) VALUES (?, ?)`, [ip, fecha]);
+    }
+
+    res.json({ ok: true });
+  });
+});
+
+// Ruta: GET /visitas
+baseRouter.get('/visitas', (req, res) => {
+  const current = getMonthRange(0);
+  const prev = getMonthRange(-1);
+
+  const contar = (range, cb) => {
+    db.all(
+      `SELECT DISTINCT ip FROM visitas WHERE fecha BETWEEN ? AND ?`,
+      [range.start, range.end],
+      (err, rows) => cb(err, rows.length)
+    );
+  };
+
+  contar(current, (err1, actual) => {
+    if (err1) return res.status(500).json({ error: err1.message });
+
+    contar(prev, (err2, anterior) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      res.json({
+        mes_actual: actual,
+        mes_anterior: anterior
+      });
+    });
+  });
+});

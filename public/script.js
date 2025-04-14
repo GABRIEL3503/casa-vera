@@ -2375,3 +2375,16 @@ function cambiarFrase() {
 
 // Inicia el carrusel de frases
 setInterval(cambiarFrase, 4000); // Tiempo total para cambiar frase (4 segundos)
+async function mostrarVisitas() {
+  try {
+    await fetch('/visitas', { method: 'POST' }); // registrar la visita
+    const res = await fetch('/visitas'); // obtener conteo
+    const data = await res.json();
+    document.getElementById('mes-actual').textContent = data.mes_actual;
+    document.getElementById('mes-anterior').textContent = data.mes_anterior;
+  } catch (err) {
+    console.error('Error al obtener visitas:', err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', mostrarVisitas);
