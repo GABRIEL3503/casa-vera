@@ -1036,31 +1036,6 @@ baseRouter.get('/monitor/memory', (req, res) => {
     totalSystemMemory: `${(totalMemory / 1024 / 1024).toFixed(2)} MB`, // Memoria total del sistema
   });
 });
-
-
-
-app.use('/casa-vera', baseRouter);
-
-// Luego sirve el contenido estático
-app.use('/casa-vera', express.static(path.join(__dirname, 'public')));
-
-// Finalmente, para todas las demás rutas bajo '/inventario', sirve el index.html
-app.get('/casa-vera/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
-
-
-baseRouter.get('/api/menuVersion', (req, res) => {
-    res.json({ version: menuVersion });
-});
-// app.get('/api/menuVersion', (req, res) => {
-//   res.json({ version: menuVersion });
-// });
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-
-
 // Obtener IP del visitante
 function getClientIp(req) {
   return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -1122,3 +1097,27 @@ baseRouter.get('/visitas', (req, res) => {
     });
   });
 });
+
+
+app.use('/casa-vera', baseRouter);
+
+// Luego sirve el contenido estático
+app.use('/casa-vera', express.static(path.join(__dirname, 'public')));
+
+// Finalmente, para todas las demás rutas bajo '/inventario', sirve el index.html
+app.get('/casa-vera/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+
+baseRouter.get('/api/menuVersion', (req, res) => {
+    res.json({ version: menuVersion });
+});
+// app.get('/api/menuVersion', (req, res) => {
+//   res.json({ version: menuVersion });
+// });
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+
