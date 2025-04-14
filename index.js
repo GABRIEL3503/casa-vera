@@ -6,9 +6,10 @@ import { fileURLToPath } from 'url';
 import multer from 'multer';
 import sharp from 'sharp';
 import fs from 'fs'; 
-app.set('trust proxy', true);
 
 const app = express();
+app.set('trust proxy', true); // ⬅️ Habilita detección de IP real detrás de proxy
+
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
