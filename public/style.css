@@ -144,8 +144,8 @@ margin-bottom: 88px;}
 }
 
 .section-title {
-  font-family: 'Satoshi', sans-serif;
-;
+  font-family: "Roboto Condensed", sans-serif;
+;text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 2px;
   display: flex;
@@ -182,10 +182,10 @@ margin-bottom: 88px;}
 
 
 .item-description {
-  font-weight: 400;
-  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
 ;
-  font-size: 44px;
+  font-size: 48px;
   font-style: normal;
   color: #301F1E !important;
 
@@ -218,15 +218,22 @@ p {
 }
 
 .item-title {
-  font-weight: 900;
+  font-weight: 700;
   /* font-style: italic; */
   max-width: 80%;
-  font-family: 'Satoshi', sans-serif;
+  font-family: "Roboto", sans-serif;
   letter-spacing: 2px;
   margin-top: 31px;
   color: #84592E;
   /* margin: 6px; */
   font-size: 72px;
+}
+.item-title {
+  text-transform: lowercase; /* primero todo en minúsculas */
+}
+
+.item-title::first-letter {
+  text-transform: uppercase; /* luego la primera letra en mayúscula */
 }
 
 .item-title::after {
@@ -248,13 +255,11 @@ p {
   color: #301F1E;
   letter-spacing: -0.5px;
   margin-left: 286px;
-  font-family: 'Satoshi', sans-serif;
-  font-style: italic
+  font-family: "Roboto", sans-serif;
 ;
 
   font-size: 64px;
   font-weight: 400;
-  font-style: italic;
 }
 
 /* ... Otros estilos ... */
@@ -548,8 +553,8 @@ h2 {
 }
 
 h2 span {
-  font-family: 'Satoshi', sans-serif;
-; font-weight: 900;
+  font-family: "Roboto Condensed", sans-serif;
+; font-weight: 800;
   display: flex;
   color: #84592E;
   font-size: 80px;
@@ -1145,6 +1150,7 @@ footer a {
 }
 
 .price-button-container .add-to-cart-btn {
+  border-radius: 50px;
   font-size: 44px;
  font-style: italic;
   padding: 16px 30px;
