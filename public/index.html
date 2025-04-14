@@ -66,12 +66,12 @@
   </span>
     <button id="create-announcement-button" class="edit-button auth-required"><img src="img/anunc.png" alt="">Anuncio</button>
     <button id="edit-delivery-price-button" class="edit-button auth-required"><img src="img/money.png" alt="">Envío</button>
+    <button id="abrir-popup-visitas" class="edit-button auth-required" style="display: inline-block;">
+      <img src="img/ojito.png" alt="Icono Vistas"> Vistas
+    </button>
+    
   </span>
-  <section id="visitas" style="padding: 1rem; border: 1px solid #ccc; margin-top: 1rem;">
-  <h2>Contador de Visitas</h2>
-  <p>Visitas este mes: <strong id="mes-actual">...</strong></p>
-  <p>Visitas mes pasado: <strong id="mes-anterior">...</strong></p>
-</section>
+
 
     <div class="footer-left">
       <span class="social-footer">
@@ -89,7 +89,15 @@
           </div>
 
   </div>
-
+  <div id="popup-visitas" class="popup-overlay" style="display: none;">
+    <div class="popup-content">
+      <h2>Contador de Visitas</h2>
+      <p>Visitas este mes: <strong id="mes-actual">...</strong></p>
+      <p>Visitas mes pasado: <strong id="mes-anterior">...</strong></p>
+      <button id="cerrar-popup-visitas">Cerrar</button>
+    </div>
+  </div>
+  
 <!-- Botón flotante para el carrito -->
 <button id="cart-button" class="floating-cart-btn">
   <img src="img/CarritoIcon.png" alt=""> <p>Pedido</p>
