@@ -98,11 +98,12 @@ body {
   width: 110px;
 }
 .redes-iconos{
-margin-top: 80px;
+margin-top: -566px;
 margin-bottom: 88px;}
 
 .container {
-  background-color: #E8DAEF;
+  background-color:  #F1F2F3
+  ;
   position: relative;
   /* Establecer el contexto de posicionamiento para los elementos hijos */
   overflow: hidden;
@@ -122,14 +123,20 @@ margin-bottom: 88px;}
 .image-container img {
   padding: 28px;
   /* margin: 40px; */
-  width: 720px;
   object-fit: cover;
+  width: 560px;
+  height: 560px;
 }
 
 .image-container {
-  margin-top: 720px;
-  display: flex;
+  width: 100%;
+  align-items: center;
+  background-image: url(img/FondoInicio.png);
+  /* margin-top: 720px; */
+  display: flex
+;
   justify-content: center;
+  height: 80vh;
 }
 
 .menu-section {
@@ -1180,12 +1187,12 @@ footer a {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background-color: #585381;
+  background-color: #84592E;
   color: white;
   font-size: 38px;
   border: none;
-  padding: 10px 20px;
-  border-radius: 0px;
+  padding: 18px 28px;
+  border-radius: 60px;
   cursor: pointer;
   z-index: 1000;
 }
