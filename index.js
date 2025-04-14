@@ -1064,6 +1064,7 @@ baseRouter.post('/visitas', (req, res) => {
   const userAgent = req.headers['user-agent'] || 'unknown';
   const identificador = `${ip}-${userAgent}`;
   const fecha = new Date().toISOString().split('T')[0];
+  const hora = new Date().toTimeString().split(' ')[0]; // HH:MM:SS
 
   db.get(
     `SELECT 1 FROM visitas WHERE ip = ? AND fecha = ?`,
@@ -1072,7 +1073,8 @@ baseRouter.post('/visitas', (req, res) => {
       if (err) return res.status(500).json({ error: err.message });
 
       if (!row) {
-        db.run(`INSERT INTO visitas (ip, fecha) VALUES (?, ?)`, [identificador, fecha]);
+        db.run( `INSERT INTO visitas (ip, fecha, hora) VALUES (?, ?, ?)`,
+          [identificador, fecha, hora]);
       }
 
       res.json({ ok: true });
