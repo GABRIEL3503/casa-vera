@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import multer from 'multer';
 import sharp from 'sharp';
 import fs from 'fs'; 
+app.set('trust proxy', true);
 
 const app = express();
 app.use(express.static('public'));
