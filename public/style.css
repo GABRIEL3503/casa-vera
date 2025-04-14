@@ -2500,5 +2500,7 @@ font-size: 2.1rem;
     text-align: center;
   }
   #cerrar-popup-visitas{
-    background:none;
-  }
+    font-size: 18px;
+    background: none;
+    text-decoration: underline;
+    border: none;  }
