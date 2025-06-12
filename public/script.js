@@ -2189,16 +2189,14 @@ function addNavbarLinkEvents() {
       const targetType = this.getAttribute('data-type');
       const targetGroup = this.getAttribute('data-group');
 
-      // Primero encontrar el grupo correcto
       const targetGroupContainer = document.querySelector(`.menu-group[data-group="${targetGroup}"]`);
       if (!targetGroupContainer) return;
 
-      // Luego buscar la sección dentro de ese grupo
       const targetSection = targetGroupContainer.querySelector(`.menu-section[data-type="${targetType}"]`);
 
       if (targetSection) {
         window.scrollTo({
-          top: targetSection.offsetTop - 100, // Ajuste para el navbar fijo
+          top: targetSection.offsetTop - 100,
           behavior: 'smooth'
         });
         navbarLinks.classList.remove('active');
@@ -2207,39 +2205,24 @@ function addNavbarLinkEvents() {
     });
   });
 
-  // Enlaces padre (grupos)
-  const parentLinks = document.querySelectorAll('.navbar-links .parent-link');
-  parentLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const groupContainer = this.parentElement;
-      const sectionLinks = groupContainer.querySelector('.section-links');
-
-      const isVisible = sectionLinks.style.display === 'block';
-      sectionLinks.style.display = isVisible ? 'none' : 'block';
-
-      // Toggle clase para rotar ícono
-      this.classList.toggle('open', !isVisible);
-    });
-  });
-
-
+  // Ya NO es necesario manejar el despliegue manual de section-links
+  // Por lo tanto, eliminamos esta parte completamente
 }
+
 function scrollFunction() {
-  const navbar = document.querySelector('.navbar'); // Selecciona el navbar
+  const navbar = document.querySelector('.navbar');
 
   if (document.documentElement.scrollTop > 20) {
-    // Si se hace scroll hacia abajo, muestra el navbar
     if (!navbar.classList.contains('visible')) {
       navbar.classList.add('visible');
     }
   } else {
-    // Si se vuelve al tope, oculta el navbar
     if (navbar.classList.contains('visible')) {
       navbar.classList.remove('visible');
     }
   }
 }
+
 
 // Asocia la función al evento de scroll
 window.addEventListener('scroll', scrollFunction);

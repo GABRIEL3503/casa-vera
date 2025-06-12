@@ -2325,7 +2325,7 @@ width: auto ;}
   bottom: 300px; /* Ajusta esta distancia si es necesario */
 }
 .section-links {
-  display: none;
+  display: block;
 }
 .parent-link img {
   transition: transform 0.3s ease;
