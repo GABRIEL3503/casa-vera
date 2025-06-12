@@ -2327,6 +2327,9 @@ width: auto ;}
 .section-links {
   display: block;
 }
+.parent-link{
+  display: none;
+}
 .parent-link img {
   transition: transform 0.3s ease;
 }
