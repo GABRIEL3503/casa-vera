@@ -2328,7 +2328,7 @@ width: auto ;}
   display: block;
 }
 .parent-link{
-  display: none;
+  display: none!important;
 }
 .parent-link img {
   transition: transform 0.3s ease;
