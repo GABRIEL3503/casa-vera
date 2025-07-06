@@ -935,8 +935,9 @@ div:where(.swal2-container) .swal2-html-container {
 }
 
 .navbar-logo img {
-  margin-top: 20px;
-  width: 388px
+     height: 78px;
+    margin-top: 34px;
+    width: 220px;
 }
 
 
