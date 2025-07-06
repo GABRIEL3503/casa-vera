@@ -1967,7 +1967,7 @@ input[type="radio"]:checked::before {
 .progress {
   width: 0%;
   height: 100%;
-  background: linear-gradient(31deg, #f9d0be 0%, #fb550d 100%);
+  background: linear-gradient(31deg, #bed7f9 0%, #0d7cfb 100%);
   border-radius: 10px;
   animation: load 3s ease-in-out forwards;
 }
